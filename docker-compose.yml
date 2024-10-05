@@ -1,0 +1,21 @@
+services:
+  web:
+    build: ./app
+    ports:
+      - "2424:5000"
+    volumes:
+      - ./app:/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: test_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
